@@ -175,7 +175,7 @@ class TrackDatabase:
 class EnhancedNCSDownloader:
     """Enhanced NCS downloader with JSON track management"""
     
-    def __init__(self, download_dir: str = "ncs_downloads", delay: float = 2.0, dry_run: bool = False):
+    def __init__(self, download_dir: str = "data/downloads", delay: float = 10.0, dry_run: bool = False):
         """Initialize the enhanced NCS downloader"""
         self.base_url = "https://ncs.io"
         self.download_dir = Path(download_dir)
@@ -726,9 +726,9 @@ def main():
     print("4. Test single track with metadata extraction")
     
     choice = input("\nSelect option (1-4): ").strip()
-    
-    download_dir = input("Enter download directory (default: ncs_downloads): ").strip() or "ncs_downloads"
-    
+
+    download_dir = input("Enter download directory (default: data/downloads): ").strip() or "data/downloads"
+
     if choice == "2":
         # View database stats
         downloader = EnhancedNCSDownloader(download_dir=download_dir, dry_run=True)
@@ -758,7 +758,7 @@ def main():
         print(f"Artists: {enhanced_track.artists}")
         print(f"Genres: {enhanced_track.genres}")
         print(f"Publish Date: {enhanced_track.publish_date}")
-        print(f"Download URL: {enhanced_track.download_url}")
+        print(f"Download URL: {enhanced_track.url}")
         print(f"Credit Info: {enhanced_track.credit_info}")
         downloader.cleanup()
         return
