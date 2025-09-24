@@ -62,7 +62,7 @@ class NCSDownloader:
     def download_file(self, link):
 
         pass
-        #　return download_file = {[title, artists, url, publish_date]}
+        #　return download_file = {[title, genres, artists, url, publish_date]}
         # download_file
 
 
@@ -71,7 +71,7 @@ class NCSDownloader:
         print("Driver closed.")
 
 """
-download_files = {[title, artists, url, publish_date]}
+download_files = {[title, genres, artists, url, publish_date]}
 この形式で
 """
 
