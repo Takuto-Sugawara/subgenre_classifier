@@ -16,17 +16,16 @@ url = "https://ncs.io/"
 
 class CheckpointManager:
 
-    def __init__(self, checkpoint_file="checkpoint.json"):
+    def __init__(self, tracks_data="tracks_data.json"):
         pass
         
 class NCSDownloader:
 
-    def __init__(self, url, checkpoint_file="checkpoint.json", limit=10, headless=False):
+    def __init__(self, url, tracks_data="tracks_data.json", limit=10, headless=False):
         self.url = url
-        self.track_links = []
-        self.checkpoint = checkpoint_file
-        self.downloaded_files = []
-        self.load_checkpoint()
+        self.track_links = [] # ダウンロードリンクを格納するリスト
+        self.tracks_database = tracks_data #曲の情報を管理するjsonファイル
+        self.load_database()
         self.limit = limit
 
         options = Options()
@@ -39,30 +38,36 @@ class NCSDownloader:
         service = Service(ChromeDriverManager().install())
         self.driver = webdriver.Chrome(service=service, options=options)
 
-    def load_checkpoint(self):
+    def load_database(self):
         pass #あとでやる
  
     def enter(self):
         self.driver.get(self.url)
         print("Successfully entered URL:", self.url)
-        time.sleep(10) #念のため
+        time.sleep(1) #念のため
 
     def search_download_links(self):
-        pass #あとでやる
+        for _ in range(self.limit):
+            print("Searching for download links...")
+            body = self.driver.find_element(By.TAG_NAME, "body")
+            main = body.find_element(By.TAG_NAME, "main")
+            print(main)
+
+        return
         #チェックポイントファイルを参照して、重複しているリンクはdownload_linksに追加しない
 
     def download_files(self):
-        for i in range(self.limit):
+        for i in range(len(self.track_links)):
             download = self.download_file(self.track_links[i])
             self.downloaded_files.append(download)
             print(f"Downloaded file {i+1}/{self.limit}: {download}")
-            print("waiting for 300 seconds before next download...")
-            time.sleep(300)
+            print("waiting for 10 seconds before next download...")
+            time.sleep(10)
 
     def download_file(self, link):
 
         pass
-        #　return download_file = {[title, genres, artists, url, publish_date]}
+        #　return download_file = {[title, genres, artists]}
         # download_file
 
 
@@ -71,7 +76,7 @@ class NCSDownloader:
         print("Driver closed.")
 
 """
-download_files = {[title, genres, artists, url, publish_date]}
+download_files = {[title, genres, artists]}
 この形式で
 """
 
