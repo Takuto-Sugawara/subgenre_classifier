@@ -1,15 +1,3 @@
-#!/usr/bin/env python3
-"""
-Enhanced NCS Music Downloader with JSON Track Management
-Automatically downloads music from NCS and manages track information in JSON format
-Author: Assistant
-Date: 2025-09-23
-
-IMPORTANT: This script is for educational purposes only.
-Please ensure you comply with NCS usage policy and terms of service.
-Always provide proper attribution when using NCS music.
-"""
-
 import os
 import time
 import requests
@@ -21,7 +9,6 @@ import logging
 from typing import List, Dict, Optional, Set
 from dataclasses import dataclass, asdict
 from datetime import datetime, date
-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -47,8 +34,7 @@ class Track:
     title: str
     artists: List[str]
     genres: List[str]
-    url: str
-    download_url: Optional[str] = None
+    url: Optional[str] = None
     publish_date: Optional[str] = None
     credit_info: Optional[str] = None
     file_size: Optional[int] = None
@@ -121,9 +107,8 @@ class TrackDatabase:
             "title": track.title,
             "genres": track.genres,
             "artists": track.artists,
-            "url": track.download_url or track.url,
+            "url": track.url,
             "publish_date": track.publish_date,
-            "original_url": track.url,
             "credit_info": track.credit_info,
             "file_path": track.file_path,
             "file_size": track.file_size,
@@ -142,7 +127,7 @@ class TrackDatabase:
                 "title": track.title,
                 "genres": track.genres,
                 "artists": track.artists,
-                "url": track.download_url or track.url,
+                "url": track.url,
                 "publish_date": track.publish_date,
                 "credit_info": track.credit_info,
                 "file_path": track.file_path,
@@ -734,14 +719,7 @@ class EnhancedNCSDownloader:
         logger.info("Resources cleaned up")
 
 def main():
-    """Main function with enhanced database features"""
-    print("Enhanced NCS Music Downloader with JSON Database")
-    print("=" * 60)
-    print("IMPORTANT: Please ensure you comply with NCS usage policy.")
-    print("Always provide proper attribution when using NCS music.")
-    print("=" * 60)
-    
-    print("\nOptions:")
+    print("Options:")
     print("1. Download tracks with database management")
     print("2. View database statistics")
     print("3. Export database")

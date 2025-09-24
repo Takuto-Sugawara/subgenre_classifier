@@ -45,7 +45,7 @@ class NCSDownloader:
     def enter(self):
         self.driver.get(self.url)
         print("Successfully entered URL:", self.url)
-        time.sleep(5) #念のため
+        time.sleep(10) #念のため
 
     def search_download_links(self):
         pass #あとでやる
