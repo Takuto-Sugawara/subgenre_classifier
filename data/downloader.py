@@ -21,7 +21,7 @@ class CheckpointManager:
         
 class NCSDownloader:
 
-    def __init__(self, url, tracks_data="tracks_data.json", limit=10, headless=False):
+    def __init__(self, url, tracks_data="tracks_data.json", limit=1, headless=False):
         self.url = url
         self.track_links = [] # ダウンロードリンクを格納するリスト
         self.tracks_database = tracks_data #曲の情報を管理するjsonファイル
@@ -50,7 +50,7 @@ class NCSDownloader:
         for _ in range(self.limit):
             print("Searching for download links...")
             body = self.driver.find_element(By.TAG_NAME, "body")
-            main = body.find_element(By.TAG_NAME, "main")
+            main = body.find_element(By.TAG_NAME, "main").text
             print(main)
 
         return
