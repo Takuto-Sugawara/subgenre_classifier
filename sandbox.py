@@ -2,8 +2,10 @@ import torch
 from transformers import TorchAoConfig, AutoImageProcessor, AutoModel
 from torchao.quantization import Int4WeightOnlyConfig
 from transformers.image_utils import load_image
+import os
 
 
+token = os.getenv("token3")
 url = "http://images.cocodataset.org/val2017/000000039769.jpg"
 image = load_image(url)
 
