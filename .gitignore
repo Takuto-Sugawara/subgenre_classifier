@@ -2,7 +2,3 @@
 .env
 ncs_downloader.log
 data/*
-!downloader.py
-!downloader_v2.py
-!data_manager.py
-!downloader_v2_test.py
